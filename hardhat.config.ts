@@ -6,6 +6,7 @@ import "dotenv/config"
 import "@openzeppelin/hardhat-upgrades"
 
 const GOERLI_PRIVATE_KEY = process.env.GOERLI_PRIVATE_KEY
+const GOERLI_PRIVATE_KEY2 = process.env.GOERLI_PRIVATE_KEY2 || ""
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL || ""
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || ""
 
@@ -27,8 +28,7 @@ const config: HardhatUserConfig = {
         },
         goerli: {
             url: GOERLI_RPC_URL,
-            accounts:
-                GOERLI_PRIVATE_KEY !== undefined ? [GOERLI_PRIVATE_KEY] : [],
+            accounts: GOERLI_PRIVATE_KEY !== undefined ? [GOERLI_PRIVATE_KEY, GOERLI_PRIVATE_KEY2] : [],
             saveDeployments: true,
             chainId: 5,
         },
@@ -51,13 +51,13 @@ const config: HardhatUserConfig = {
         outputFile: "gas-report.txt",
         noColors: true,
         coinmarketcap: process.env.COINMARKETCAP_API_KEY,
-        token: "AVAX",
+        token: "ETH",
     },
     namedAccounts: {
         deployer: {
             default: 0,
         },
-        player: {
+        attacker: {
             default: 1,
         },
     },
